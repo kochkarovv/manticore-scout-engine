@@ -138,7 +138,7 @@ class ManticoreMysqlEngine extends Engine
 
         $manticoreBuilder = app(\RomanStruk\ManticoreScoutEngine\Mysql\Builder::class)
             ->index($builder->index ?: $builder->model->searchableAs())
-            ->search($builder->query)
+            ->search(is_string($builder->query) ? $builder->query : $builder->query->query)
             ->take($perPage)
             ->offset($offset);
 
